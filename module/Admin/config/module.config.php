@@ -3,7 +3,8 @@
 return array(
     'controllers' => array(
         'invokables' => array(
-            'Admin\Controller\Index' => 'Admin\Controller\IndexController'
+            'Admin\Controller\Index' => 'Admin\Controller\IndexController',
+            'category' => 'Admin\Controller\CategoryController'
         ),
     ),
     'router' => array(
@@ -17,7 +18,21 @@ return array(
                         'action'     => 'index',
                     ),
                 ),
+                'may_terminate' => true,
+                'child_routes' => array(
+                    'category' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => 'category/[:action/][:id/]',
+                            'defaults' => array(
+                                'controller' => 'category',
+                                'action' => 'index'
+                            ),
+                        ),
+                    ),
+                ),
             ),
+
         ),
     ),
     'view_manager' => array(
