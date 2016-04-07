@@ -4,7 +4,8 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Admin\Controller\Index' => 'Admin\Controller\IndexController',
-            'category' => 'Admin\Controller\CategoryController'
+            'category' => 'Admin\Controller\CategoryController',
+            'article'  => 'Admin\Controller\ArticleController',
         ),
     ),
     'router' => array(
@@ -30,6 +31,16 @@ return array(
                             ),
                         ),
                     ),
+                    'article' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => 'article/[:action/][:id/]',
+                            'defaults' => array(
+                                'controller' => 'article',
+                                'action' => 'index'
+                            ),
+                        ),
+                    ),
                 ),
             ),
 
@@ -38,6 +49,9 @@ return array(
     'view_manager' => array(
         'template_path_stack' => array(
             __DIR__ . '/../view',
+        ),
+        'template_map' => array(
+            'pagination_control' => __DIR__ . '/../view/layout/pagination_control.phtml',
         )
     )
 );
